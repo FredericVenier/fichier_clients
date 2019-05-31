@@ -1,5 +1,6 @@
 package FichierClients;
 
+import Model.Client;
 import Model.JSONHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,9 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class MenuViews {
-    private static List<Song> songs;
+    private static List<Client> clients;
 
-    public static void setWheelView() {
+    public static void setMainView() {
         //JSONHandler.save(songs);
 
         Stage stage=new Stage();
@@ -22,7 +23,7 @@ public class MenuViews {
         FXMLLoader loader;
         loader=new FXMLLoader();
 
-        ViewWheel vw = new ViewWheel(0,144,500, songs);
+        ViewSearch view = new ViewSearch(0,144,500, clients);
         loader.setControllerFactory(instantiatedClass -> vw );
         vw.start(root);
 
@@ -39,72 +40,8 @@ public class MenuViews {
         Main.setStage(stage);
     }
 
-    public static void setSongView(Song song) {
-        ViewSong vs = new ViewSong(song);
-
-        Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(Main.class.getResource("/Controleur/Song.fxml"));
-        loader.setControllerFactory(instantiatedClass -> vs );
-        try {
-            root.setCenter(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        stage.setTitle("U-ziK");
-        stage.setScene(new Scene(root, 1024, 576));
-        stage.getScene().getStylesheets().add("css/style.css");
-        Main.setStage(stage);
-    }
-
-    public static void setStarsView(Song song, int nbOfGoodAnswers) {
-        ViewStars vs = new ViewStars(song, nbOfGoodAnswers);
-
-        Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(Main.class.getResource("/Controleur/Stars.fxml"));
-        loader.setControllerFactory(instantiatedClass -> vs );
-        try {
-            root.setCenter(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        vs.start(root);
-
-        stage.setTitle("U-ziK");
-        stage.setScene(new Scene(root, 1024, 576));
-        stage.getScene().getStylesheets().add("css/style.css");
-        Main.setStage(stage);
-    }
-
-    public static void setQuizzView(Song song) {
-        ViewQuizz vq = new ViewQuizz(song);
-
-        Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-        FXMLLoader loader = new FXMLLoader();
-
-        loader.setLocation(Main.class.getResource("/Controleur/Quizz.fxml"));
-        loader.setControllerFactory(instantiatedClass -> vq );
-        try {
-            root.setCenter(loader.load());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        stage.setTitle("U-ziK");
-        stage.setScene(new Scene(root, 1024, 576));
-        stage.getScene().getStylesheets().add("css/style.css");
-        Main.setStage(stage);
-    }
-
-    public static void setSongs() {
-        songs = JSONHandler.load();
+    public static void setClients() {
+        clients = JSONHandler.loadClients();
     }
 
 }

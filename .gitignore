@@ -2,6 +2,4 @@
 *.idea
 *.iml
 *.MF
-
-#java
-out/
+/out
