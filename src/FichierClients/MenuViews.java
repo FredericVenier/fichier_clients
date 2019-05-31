@@ -1,6 +1,6 @@
 package FichierClients;
 
-import Model.SongsLoader;
+import Model.JSONHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -15,7 +15,7 @@ public class MenuViews {
     private static List<Song> songs;
 
     public static void setWheelView() {
-        //SongsLoader.save(songs);
+        //JSONHandler.save(songs);
 
         Stage stage=new Stage();
         Pane root= new Pane();
@@ -104,7 +104,7 @@ public class MenuViews {
     }
 
     public static void setSongs() {
-        songs = SongsLoader.load();
+        songs = JSONHandler.load();
     }
 
 }
