@@ -7,21 +7,20 @@
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controleur.ViewNewClient">
    <top>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ToolBar BorderPane.alignment="CENTER">
          <items>
-            <BorderPane prefHeight="28.0" prefWidth="583.0">
-               <right>
-                  <Button mnemonicParsing="false" text="Retour" BorderPane.alignment="CENTER" />
-               </right></BorderPane>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#retour"  text="Retour" />
          </items>
       </ToolBar>
    </top>
    <bottom>
-      <Button mnemonicParsing="false" text="Ajouter" BorderPane.alignment="CENTER">
+      <Button mnemonicParsing="false" onAction="#ajouter" text="Ajouter" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>

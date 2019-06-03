@@ -1,12 +1,14 @@
 package FichierClients;
 
+import Controleur.ViewClient;
+import Controleur.ViewNewClient;
+import Controleur.ViewNewPrestation;
+import Controleur.ViewSearch;
 import Model.Client;
 import Model.JSONHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,30 +17,90 @@ import java.util.List;
 public class MenuViews {
     private static List<Client> clients;
 
-    public static void setMainView() {
-        //JSONHandler.save(songs);
+    public static void setViewSearch() {
 
-        Stage stage=new Stage();
-        Pane root= new Pane();
-        FXMLLoader loader;
-        loader=new FXMLLoader();
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        FXMLLoader loader = new FXMLLoader();
 
-        ViewSearch view = new ViewSearch(0,144,500, clients);
-        loader.setControllerFactory(instantiatedClass -> vw );
-        vw.start(root);
+        ViewSearch view = new ViewSearch();
+        loader.setLocation(Main.class.getResource("/Controleur/Search.fxml"));
+        loader.setControllerFactory(instantiatedClass -> view );
+        try {
+            root.setCenter(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        stage.setTitle("U-ziK");
+        stage.setTitle("Fichier Clients");
         stage.setScene(new Scene(root, 1024, 576));
         stage.getScene().getStylesheets().add("css/style.css");
-        stage.getScene().setOnKeyPressed(e -> {
-            if (e.getCode() == KeyCode.A) {
-                vw.action(true);
-            } else if(e.getCode() == KeyCode.Z) {
-                vw.action(false);
-            }
-        });
         Main.setStage(stage);
     }
+
+    public static void setViewNewClient() {
+
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        FXMLLoader loader = new FXMLLoader();
+
+        ViewNewClient view = new ViewNewClient();
+        loader.setLocation(Main.class.getResource("/Controleur/NewClient.fxml"));
+        loader.setControllerFactory(instantiatedClass -> view );
+        try {
+            root.setCenter(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setTitle("Fichier Clients");
+        stage.setScene(new Scene(root, 1024, 576));
+        stage.getScene().getStylesheets().add("css/style.css");
+        Main.setStage(stage);
+    }
+
+    public static void setViewClient() {
+
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        FXMLLoader loader = new FXMLLoader();
+
+        ViewClient view = new ViewClient();
+        loader.setLocation(Main.class.getResource("/Controleur/Client.fxml"));
+        loader.setControllerFactory(instantiatedClass -> view );
+        try {
+            root.setCenter(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setTitle("Fichier Clients");
+        stage.setScene(new Scene(root, 1024, 576));
+        stage.getScene().getStylesheets().add("css/style.css");
+        Main.setStage(stage);
+    }
+
+    public static void setViewNewPrestation() {
+
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        FXMLLoader loader = new FXMLLoader();
+
+        ViewNewPrestation view = new ViewNewPrestation();
+        loader.setLocation(Main.class.getResource("/Controleur/NewPrestation.fxml"));
+        loader.setControllerFactory(instantiatedClass -> view );
+        try {
+            root.setCenter(loader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        stage.setTitle("Fichier Clients");
+        stage.setScene(new Scene(root, 1024, 576));
+        stage.getScene().getStylesheets().add("css/style.css");
+        Main.setStage(stage);
+    }
+
 
     public static void setClients() {
         clients = JSONHandler.loadClients();

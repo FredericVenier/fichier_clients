@@ -8,7 +8,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        MenuViews.setWheelView();
+        MenuViews.setViewSearch();
         mainStage.show();
 
     }
@@ -22,7 +22,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        MenuViews.setSongs();
+        //MenuViews.setViewSearch();
         launch(args);
     }
 }
