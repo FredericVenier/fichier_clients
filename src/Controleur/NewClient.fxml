@@ -15,7 +15,7 @@
       <ToolBar BorderPane.alignment="CENTER">
          <items>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#retour"  text="Retour" />
+            <Button mnemonicParsing="false" onAction="#retour" text="Retour" />
          </items>
       </ToolBar>
    </top>
@@ -32,19 +32,19 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Prénom   " />
-                  <TextField />
+                  <TextField fx:id="firstname" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Nom " />
-                  <TextField />
+                  <TextField fx:id="lastname" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="E-Mail " />
-                  <TextField />
+                  <TextField fx:id="email" />
                </children>
             </HBox>
          </children>

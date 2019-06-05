@@ -32,19 +32,19 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Date" />
-                  <TextField />
+                  <TextField fx:id="date" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Description" />
-                  <TextField />
+                  <TextField fx:id="description" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Prix" />
-                  <TextField />
+                  <TextField fx:id="price" />
                </children>
             </HBox>
          </children>

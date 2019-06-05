@@ -5,13 +5,14 @@ import Controleur.ViewNewClient;
 import Controleur.ViewNewPrestation;
 import Controleur.ViewSearch;
 import Model.Client;
-import Model.JSONHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MenuViews {
@@ -23,7 +24,7 @@ public class MenuViews {
         BorderPane root = new BorderPane();
         FXMLLoader loader = new FXMLLoader();
 
-        ViewSearch view = new ViewSearch();
+        ViewSearch view = new ViewSearch(clients);
         loader.setLocation(Main.class.getResource("/Controleur/Search.fxml"));
         loader.setControllerFactory(instantiatedClass -> view );
         try {
@@ -32,6 +33,7 @@ public class MenuViews {
             e.printStackTrace();
         }
 
+        view.init();
         stage.setTitle("Fichier Clients");
         stage.setScene(new Scene(root, 1024, 576));
         stage.getScene().getStylesheets().add("css/style.css");
@@ -59,13 +61,13 @@ public class MenuViews {
         Main.setStage(stage);
     }
 
-    public static void setViewClient() {
+    public static void setViewClient(Client client) {
 
         Stage stage = new Stage();
         BorderPane root = new BorderPane();
         FXMLLoader loader = new FXMLLoader();
 
-        ViewClient view = new ViewClient();
+        ViewClient view = new ViewClient(client);
         loader.setLocation(Main.class.getResource("/Controleur/Client.fxml"));
         loader.setControllerFactory(instantiatedClass -> view );
         try {
@@ -74,19 +76,20 @@ public class MenuViews {
             e.printStackTrace();
         }
 
+        view.init();
         stage.setTitle("Fichier Clients");
         stage.setScene(new Scene(root, 1024, 576));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
 
-    public static void setViewNewPrestation() {
+    public static void setViewNewPrestation(Client client) {
 
         Stage stage = new Stage();
         BorderPane root = new BorderPane();
         FXMLLoader loader = new FXMLLoader();
 
-        ViewNewPrestation view = new ViewNewPrestation();
+        ViewNewPrestation view = new ViewNewPrestation(client);
         loader.setLocation(Main.class.getResource("/Controleur/NewPrestation.fxml"));
         loader.setControllerFactory(instantiatedClass -> view );
         try {
@@ -103,7 +106,13 @@ public class MenuViews {
 
 
     public static void setClients() {
-        clients = JSONHandler.loadClients();
+        //clients = JSONHandler.loadClients();
+        clients = new ArrayList<>();
+    }
+
+    public static void addClient(Client newClient) {
+        clients.add(newClient);
+        Collections.sort(clients);
     }
 
 }

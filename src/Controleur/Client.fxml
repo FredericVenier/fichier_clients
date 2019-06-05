@@ -18,15 +18,15 @@
                <children>
                   <HBox>
                      <children>
-                        <Label text="Label" />
-                        <Label text="Label">
+                        <Label fx:id="firstname" text="Label" />
+                        <Label fx:id="lastname" text="Label">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
-                  <Label text="Label" />
+                  <Label fx:id="email" text="Label" />
                </children>
             </VBox>
             <Pane HBox.hgrow="ALWAYS" />
@@ -37,7 +37,7 @@
    <center>
       <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="vbox" />
          </content>
       </ScrollPane>
    </center>

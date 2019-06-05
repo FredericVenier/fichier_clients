@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client {
+public class Client implements Comparable<Client>{
     private String firstname;
     private String lastname;
     private String email;
@@ -55,5 +55,17 @@ public class Client {
 
     public List<Prestation> getPrestations() {
         return this.prestations;
+    }
+
+    public int compareTo(Client client) {
+        return this.lastname.compareToIgnoreCase(client.getLastname());
+    }
+
+    public String toString() {
+        return this.lastname + " " + this.firstname;
+    }
+
+    public boolean isWellCreated() {
+        return !firstname.equals("") && !lastname.equals("") && !email.equals("");
     }
 }

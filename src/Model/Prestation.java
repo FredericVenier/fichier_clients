@@ -8,7 +8,9 @@ public class Prestation {
     private float price;
 
     public Prestation() {
-
+        this.price = -1;
+        this.date = null;
+        this.description = "";
     }
 
     public Prestation(Date date, String description, float price) {
@@ -43,5 +45,9 @@ public class Prestation {
 
     public float getPrice() {
         return this.price;
+    }
+
+    public boolean isWellCreated() {
+        return !description.equals("") && date!=null && price>=0;
     }
 }
