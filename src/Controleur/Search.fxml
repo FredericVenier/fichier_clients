@@ -15,10 +15,10 @@
       <ToolBar BorderPane.alignment="CENTER">
         <items>
             <Label prefHeight="29.0" prefWidth="51.0" text="Prénom" />
-            <TextField prefHeight="28.0" prefWidth="118.0" />
+            <TextField fx:id="firstname" prefHeight="28.0" prefWidth="118.0" />
             <Label prefHeight="29.0" prefWidth="31.0" text="Nom" />
-            <TextField prefHeight="28.0" prefWidth="98.0" />
-            <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="93.0" text="Rechercher" />
+            <TextField fx:id="lastname" prefHeight="28.0" prefWidth="98.0" />
+            <Button mnemonicParsing="false" onAction="#clickOnSearch" prefHeight="36.0" prefWidth="93.0" text="Rechercher" />
             <Pane HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#newClient" text="Nouveau" />
         </items>
