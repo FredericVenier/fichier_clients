@@ -2,18 +2,23 @@ package Controleur;
 
 import FichierClients.MenuViews;
 import Model.Client;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewSearch {
     private List<Client> clients;
+    private String lastFirstname;
+    private String lastLastname;
 
     @FXML
     private VBox vbox;
@@ -28,6 +33,13 @@ public class ViewSearch {
 
     public void init() {
         updateClientsDisplayed(this.clients);
+        lastFirstname = "";
+        lastLastname = "";
+
+        final KeyFrame keyFrame1 = new KeyFrame(Duration.millis(500), actionEvent -> updateResearch());
+        final Timeline timeline = new Timeline(keyFrame1);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.playFromStart();
     }
 
     public void newClient() {
@@ -40,6 +52,15 @@ public class ViewSearch {
 
     public void clickOnSearch() {
         updateClientsDisplayed(search());
+    }
+
+    private void updateResearch() {
+        if(!lastFirstname.equals(firstname.getText()) || !lastLastname.equals(lastname.getText())) {
+            lastLastname = lastname.getText();
+            lastFirstname = firstname.getText();
+
+            updateClientsDisplayed(search());
+        }
     }
 
     private void updateClientsDisplayed(List<Client> clients) {
