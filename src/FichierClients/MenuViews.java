@@ -119,6 +119,7 @@ public class MenuViews {
             e.printStackTrace();
         }
 
+        view.init();
         stage.setTitle("Fichier Clients");
         stage.setScene(new Scene(root, 1024, 576));
         stage.getScene().getStylesheets().add("css/style.css");

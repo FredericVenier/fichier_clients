@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ViewClient {
@@ -42,7 +43,8 @@ public class ViewClient {
             VBox labelsVBox = new VBox();
 
             Label date = new Label();
-            date.setText(p.getDate().toString());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            date.setText(dateFormat.format(p.getDate()));
             labelsVBox.getChildren().add(date);
 
             Label description = new Label();

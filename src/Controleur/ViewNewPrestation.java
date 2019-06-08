@@ -6,9 +6,8 @@ import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
+import java.util.Date;
 
 public class ViewNewPrestation {
     private Client client;
@@ -22,6 +21,11 @@ public class ViewNewPrestation {
 
     public ViewNewPrestation(Client client) {
         this.client = client;
+    }
+
+    public void init() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        date.setPromptText(dateFormat.format(new Date()));
     }
 
     public void retour() {
@@ -39,10 +43,14 @@ public class ViewNewPrestation {
 
         prestation.setDescription(description.getText());
 
-        try {
-            prestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(date.getText()));
-        } catch (Exception ex) {
-            //nothing to do here, it's normal to possibly have an exception
+        if(date.getText().equals("")) {
+            prestation.setDate(new Date());
+        } else {
+            try {
+                prestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(date.getText()));
+            } catch (Exception ex) {
+                //nothing to do here, it's normal to possibly have an exception
+            }
         }
 
         if(prestation.isWellCreated()) {

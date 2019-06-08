@@ -30,7 +30,8 @@ public class ViewEditPrestation {
     }
 
     public void init() {
-        date.setPromptText(prestation.getDate().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        date.setPromptText(dateFormat.format(prestation.getDate()));
         description.setPromptText(prestation.getDescription());
         price.setPromptText(Float.toString(prestation.getPrice()));
         ajouter.setText("modifier");
@@ -53,7 +54,7 @@ public class ViewEditPrestation {
 
         if(prestation.isWellCreated()) {
             prestation.Copy(editedPrestation);
-            Collections.sort(client.getPrestations());
+            Collections.sort(client.getPrestations(), Collections.reverseOrder());
             MenuViews.setViewClient(client);
         }
     }
