@@ -35,11 +35,6 @@ public class ViewSearch {
         updateClientsDisplayed(this.clients);
         lastFirstname = "";
         lastLastname = "";
-
-        final KeyFrame keyFrame1 = new KeyFrame(Duration.millis(500), actionEvent -> updateResearch());
-        final Timeline timeline = new Timeline(keyFrame1);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.playFromStart();
     }
 
     public void newClient() {
@@ -54,13 +49,8 @@ public class ViewSearch {
         updateClientsDisplayed(search());
     }
 
-    private void updateResearch() {
-        if(!lastFirstname.equals(firstname.getText()) || !lastLastname.equals(lastname.getText())) {
-            lastLastname = lastname.getText();
-            lastFirstname = firstname.getText();
-
-            updateClientsDisplayed(search());
-        }
+    public void updateResearch() {
+        updateClientsDisplayed(search());
     }
 
     private void updateClientsDisplayed(List<Client> clients) {
@@ -84,8 +74,31 @@ public class ViewSearch {
             });
             hbox.getChildren().add(voir);
 
+            Button modifier = new Button();
+            modifier.setText("modifier");
+            modifier.setOnAction((event) -> {
+                editClient(c);
+            });
+            hbox.getChildren().add(modifier);
+
+            Button supprimer = new Button();
+            supprimer.setText("supprimer");
+            supprimer.setOnAction((event) -> {
+                removeClient(c);
+            });
+            hbox.getChildren().add(supprimer);
+
             vbox.getChildren().add(hbox);
         }
+    }
+
+    private void editClient(Client c) {
+        MenuViews.setViewEditClient(c);
+    }
+
+    private void removeClient(Client c) {
+        this.clients.remove(c);
+        updateClientsDisplayed(clients);
     }
 
     private List<Client> search() {
@@ -94,7 +107,7 @@ public class ViewSearch {
 
         List<Client> searchingResult = recursive_search(strLastname, clients);
 
-        if(!strFirstname.equals("")) {
+        if(!strFirstname.equals("") && !strLastname.equals("")) {
             List<Client> tmp = new ArrayList<>(searchingResult);
             for(Client c : tmp) {
                 if(!c.getFirstname().startsWith(strFirstname)) {

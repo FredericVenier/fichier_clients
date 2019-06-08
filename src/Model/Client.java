@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Client implements Comparable<Client>{
@@ -33,13 +34,12 @@ public class Client implements Comparable<Client>{
         this.email = newEmail;
     }
 
-    public void addPrestation_atTheBegining(Prestation newPrestation) {
-        this.prestations.add(0, newPrestation);
-    }
-
     public void addPrestation(Prestation newPrestation) {
         this.prestations.add(newPrestation);
+        Collections.sort(this.prestations, Collections.reverseOrder());
     }
+
+    public void removePrestation(Prestation prestation) {this.prestations.remove(prestation);}
 
     public String getFirstname() {
         return this.firstname;

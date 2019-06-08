@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 
 public class ViewNewPrestation {
     private Client client;
@@ -30,16 +31,22 @@ public class ViewNewPrestation {
     public void ajouter() {
         Prestation prestation =  new Prestation();
 
-        prestation.setPrice(Float.parseFloat(price.getText()));
+        try {
+            prestation.setPrice(Float.parseFloat(price.getText()));
+        } catch (Exception ex) {
+            //nothing to do here, it's normal to possibly have an exception
+        }
+
         prestation.setDescription(description.getText());
+
         try {
             prestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(date.getText()));
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            //nothing to do here, it's normal to possibly have an exception
         }
 
         if(prestation.isWellCreated()) {
-            client.addPrestation_atTheBegining(prestation);
+            client.addPrestation(prestation);
             MenuViews.setViewClient(client);
         }
     }

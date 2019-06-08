@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class Prestation {
+public class Prestation implements Comparable<Prestation> {
     private Date date;
     private String description;
     private float price;
@@ -17,6 +17,18 @@ public class Prestation {
         this.date = date;
         this.description = description;
         this.price = price;
+    }
+
+    public Prestation(Prestation p) {
+        this.date = new Date(p.getDate().toGMTString());
+        this.description = new String(p.getDescription());
+        this.price = new Float(p.getPrice());
+    }
+
+    public void Copy(Prestation p) {
+        this.date = new Date(p.getDate().toGMTString());
+        this.description = new String(p.getDescription());
+        this.price = new Float(p.getPrice());
     }
 
     public void setDate(Date newDate) {
@@ -49,5 +61,9 @@ public class Prestation {
 
     public boolean isWellCreated() {
         return !description.equals("") && date!=null && price>=0;
+    }
+
+    public int compareTo(Prestation prestation) {
+        return this.date.compareTo(prestation.getDate());
     }
 }

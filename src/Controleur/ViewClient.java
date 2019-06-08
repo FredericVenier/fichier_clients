@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.util.Date;
+
 public class ViewClient {
     Client client;
 
@@ -29,11 +31,15 @@ public class ViewClient {
         firstname.setText(client.getFirstname());
         lastname.setText(client.getLastname());
         email.setText(client.getEmail());
+        updatePrestations();
+    }
+
+    public void updatePrestations() {
+        vbox.getChildren().remove(0,vbox.getChildren().size());
 
         for(Prestation p : client.getPrestations()) {
             HBox hbox = new HBox();
             VBox labelsVBox = new VBox();
-            VBox buttonsVBox = new VBox();
 
             Label date = new Label();
             date.setText(p.getDate().toString());
@@ -52,14 +58,43 @@ public class ViewClient {
             Button same = new Button();
             same.setText("même prestation");
             same.setOnAction((event) -> {
-                client.addPrestation_atTheBegining(p);
+                samePrestation(p);
             });
-            buttonsVBox.getChildren().add(same);
+            hbox.getChildren().add(same);
 
-            hbox.getChildren().add(buttonsVBox);
+            Button modifier = new Button();
+            modifier.setText("modifier");
+            modifier.setOnAction((event) -> {
+                editPrestation(p);
+            });
+            hbox.getChildren().add(modifier);
+
+            Button supprimer = new Button();
+            supprimer.setText("supprimer");
+            supprimer.setOnAction((event) -> {
+                removePrestation(p);
+            });
+            hbox.getChildren().add(supprimer);
 
             vbox.getChildren().add(hbox);
         }
+    }
+
+    public void samePrestation(Prestation p) {
+        Prestation newPrestation = new Prestation(p);
+        newPrestation.setDate(new Date());
+
+        client.addPrestation(newPrestation);
+        updatePrestations();
+    }
+
+    public void editPrestation(Prestation prestation) {
+        MenuViews.setViewEditPrestation(client, prestation);
+    }
+
+    public void removePrestation(Prestation prestation) {
+        client.removePrestation(prestation);
+        updatePrestations();
     }
 
     public void retour() {

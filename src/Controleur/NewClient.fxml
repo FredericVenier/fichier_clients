@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controleur.ViewNewClient">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <ToolBar BorderPane.alignment="CENTER">
          <items>
@@ -20,7 +20,7 @@
       </ToolBar>
    </top>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#ajouter" text="Ajouter" BorderPane.alignment="CENTER">
+      <Button fx:id="ajouter" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
@@ -32,19 +32,19 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Prénom   " />
-                  <TextField fx:id="firstname" />
+                  <TextField fx:id="firstname" onAction="#ajouter" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Nom " />
-                  <TextField fx:id="lastname" />
+                  <TextField fx:id="lastname" onAction="#ajouter" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="E-Mail " />
-                  <TextField fx:id="email" />
+                  <TextField fx:id="email" onAction="#ajouter" />
                </children>
             </HBox>
          </children>
