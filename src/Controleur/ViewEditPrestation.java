@@ -5,10 +5,10 @@ import Model.Client;
 import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Collections;
 
 public class ViewEditPrestation {
@@ -16,7 +16,7 @@ public class ViewEditPrestation {
     private Client client;
 
     @FXML
-    private TextField date;
+    private DatePicker date;
     @FXML
     private TextField description;
     @FXML
@@ -30,8 +30,14 @@ public class ViewEditPrestation {
     }
 
     public void init() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date.setPromptText(dateFormat.format(prestation.getDate()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+        SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
+        SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+        int dateValue = Integer.parseInt(dateFormat.format(prestation.getDate()));
+        int monthValue = Integer.parseInt(monthFormat.format(prestation.getDate()));
+        int yearValue = Integer.parseInt(yearFormat.format(prestation.getDate()));
+
+        date.setValue(LocalDate.of(yearValue, monthValue, dateValue));
         description.setPromptText(prestation.getDescription());
         price.setPromptText(Float.toString(prestation.getPrice()));
         ajouter.setText("modifier");
@@ -46,10 +52,15 @@ public class ViewEditPrestation {
 
         editedPrestation.setPrice(price.getText().equals("")? prestation.getPrice() : Float.parseFloat(price.getText()));
         editedPrestation.setDescription(description.getText().equals("")? prestation.getDescription() : description.getText());
+
+        String strDate = (date.getValue().getDayOfMonth()<10? ("0"+date.getValue().getDayOfMonth()) : (date.getValue().getDayOfMonth()+""))
+                + "/" + (date.getValue().getMonthValue()<10? ("0"+date.getValue().getMonthValue()) : (date.getValue().getMonthValue()+""))
+                + "/" + date.getValue().getYear();
+
         try {
-            editedPrestation.setDate(date.getText().equals("")? prestation.getDate() : new SimpleDateFormat("dd/MM/yyyy").parse(date.getText()));
-        } catch (ParseException e) {
-            e.printStackTrace();
+            editedPrestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(strDate));
+        } catch(Exception ex) {
+            //nothing to do here, it's normal to possibly have an exception
         }
 
         if(prestation.isWellCreated()) {

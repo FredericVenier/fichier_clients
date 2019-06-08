@@ -2,23 +2,18 @@ package Controleur;
 
 import FichierClients.MenuViews;
 import Model.Client;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewSearch {
     private List<Client> clients;
-    private String lastFirstname;
-    private String lastLastname;
 
     @FXML
     private VBox vbox;
@@ -33,8 +28,6 @@ public class ViewSearch {
 
     public void init() {
         updateClientsDisplayed(this.clients);
-        lastFirstname = "";
-        lastLastname = "";
     }
 
     public void newClient() {
@@ -110,7 +103,7 @@ public class ViewSearch {
         if(!strFirstname.equals("") && !strLastname.equals("")) {
             List<Client> tmp = new ArrayList<>(searchingResult);
             for(Client c : tmp) {
-                if(!c.getFirstname().startsWith(strFirstname)) {
+                if(!c.getFirstname().toLowerCase().startsWith(strFirstname.toLowerCase())) {
                     searchingResult.remove(c);
                 }
             }
@@ -128,12 +121,12 @@ public class ViewSearch {
 
         int i = clients.size()/2;
 
-        if(clients.get(i).getLastname().startsWith(lastname)) {
+        if(clients.get(i).getLastname().toLowerCase().startsWith(lastname.toLowerCase())) {
             searchingResult.add(clients.get(i));
 
             int j = i-1;
             if(j>=0) {
-                while (j >= 0 && clients.get(j).getLastname().startsWith(lastname)) {
+                while (j >= 0 && clients.get(j).getLastname().toLowerCase().startsWith(lastname.toLowerCase())) {
                     searchingResult.add(0, clients.get(j));
                     j = j - 1;
                 }
@@ -141,7 +134,7 @@ public class ViewSearch {
 
             j = i+1;
             if(j<clients.size()) {
-                while (j < clients.size() && clients.get(j).getLastname().startsWith(lastname)) {
+                while (j < clients.size() && clients.get(j).getLastname().toLowerCase().startsWith(lastname.toLowerCase())) {
                     searchingResult.add(clients.get(j));
                     j = j + 1;
                 }

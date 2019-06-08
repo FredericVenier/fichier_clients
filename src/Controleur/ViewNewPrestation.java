@@ -4,16 +4,19 @@ import FichierClients.MenuViews;
 import Model.Client;
 import Model.Prestation;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 public class ViewNewPrestation {
     private Client client;
 
     @FXML
-    private TextField date;
+    private DatePicker date;
     @FXML
     private TextField description;
     @FXML
@@ -24,8 +27,7 @@ public class ViewNewPrestation {
     }
 
     public void init() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        date.setPromptText(dateFormat.format(new Date()));
+        date.setValue(LocalDate.now());
     }
 
     public void retour() {
@@ -43,14 +45,14 @@ public class ViewNewPrestation {
 
         prestation.setDescription(description.getText());
 
-        if(date.getText().equals("")) {
-            prestation.setDate(new Date());
-        } else {
-            try {
-                prestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(date.getText()));
-            } catch (Exception ex) {
-                //nothing to do here, it's normal to possibly have an exception
-            }
+        String strDate = (date.getValue().getDayOfMonth()<10? ("0"+date.getValue().getDayOfMonth()) : (date.getValue().getDayOfMonth()+""))
+                + "/" + (date.getValue().getMonthValue()<10? ("0"+date.getValue().getMonthValue()) : (date.getValue().getMonthValue()+""))
+                + "/" + date.getValue().getYear();
+
+        try {
+            prestation.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(strDate));
+        } catch(Exception ex) {
+            //nothing to do here, it's normal to possibly have an exception
         }
 
         if(prestation.isWellCreated()) {
