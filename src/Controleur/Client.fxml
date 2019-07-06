@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -30,8 +31,14 @@
                </children>
             </VBox>
             <Pane HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#nouveau" text="Nouveau" />
-            <Button mnemonicParsing="false" onAction="#retour" text="Retour" />
+            <Button mnemonicParsing="false" onAction="#nouveau" text="Nouveau">
+               <tooltip>
+                  <Tooltip text="Ajouter une nouvelle prestation au client." />
+               </tooltip></Button>
+            <Button mnemonicParsing="false" onAction="#retour" text="Retour">
+               <tooltip>
+                  <Tooltip text="Revenir à la liste de clients." />
+               </tooltip></Button>
          </items></ToolBar>
    </top>
    <center>

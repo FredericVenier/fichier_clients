@@ -6,6 +6,7 @@ import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -62,6 +63,8 @@ public class ViewClient {
             same.setOnAction((event) -> {
                 samePrestation(p);
             });
+            Tooltip sameTooltip = new Tooltip("Ajouter une prestation identique à la date du jour.");
+            same.setTooltip(sameTooltip);
             hbox.getChildren().add(same);
 
             Button modifier = new Button();
@@ -69,6 +72,8 @@ public class ViewClient {
             modifier.setOnAction((event) -> {
                 editPrestation(p);
             });
+            Tooltip modifierTooltip = new Tooltip("Modifier les informations de la prestation.");
+            modifier.setTooltip(modifierTooltip);
             hbox.getChildren().add(modifier);
 
             Button supprimer = new Button();
@@ -76,6 +81,8 @@ public class ViewClient {
             supprimer.setOnAction((event) -> {
                 removePrestation(p);
             });
+            Tooltip supprimerTooltip = new Tooltip("Supprimer la prestation au client.");
+            supprimer.setTooltip(supprimerTooltip);
             hbox.getChildren().add(supprimer);
 
             vbox.getChildren().add(hbox);

@@ -66,6 +66,6 @@ public class Client implements Comparable<Client>{
     }
 
     public boolean isWellCreated() {
-        return !firstname.equals("") && !lastname.equals("") && !email.equals("");
+        return !firstname.equals("") && !lastname.equals("") && !email.equals("") && email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
     }
 }

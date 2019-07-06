@@ -3,11 +3,13 @@ package Controleur;
 import FichierClients.MenuViews;
 import Model.Client;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,11 +62,17 @@ public class ViewSearch {
             firstname.setText(c.getFirstname());
             hbox.getChildren().add(firstname);
 
+            Pane rightAlignmentPane = new Pane();
+            HBox.setHgrow(rightAlignmentPane, Priority.ALWAYS);
+            hbox.getChildren().add(rightAlignmentPane);
+
             Button voir = new Button();
             voir.setText("voir");
             voir.setOnAction((event) -> {
                 seeClient(c);
             });
+            Tooltip voirTooltip = new Tooltip("Voir les détails du client et ses précédentes prestations.");
+            voir.setTooltip(voirTooltip);
             hbox.getChildren().add(voir);
 
             Button modifier = new Button();
@@ -72,6 +80,8 @@ public class ViewSearch {
             modifier.setOnAction((event) -> {
                 editClient(c);
             });
+            Tooltip modifierTooltip = new Tooltip("Modifier les informations du client.");
+            modifier.setTooltip(modifierTooltip);
             hbox.getChildren().add(modifier);
 
             Button supprimer = new Button();
@@ -79,8 +89,12 @@ public class ViewSearch {
             supprimer.setOnAction((event) -> {
                 removeClient(c);
             });
+            Tooltip supprimerTooltip = new Tooltip("Supprimer le client du fichier clients.");
+            supprimer.setTooltip(supprimerTooltip);
             hbox.getChildren().add(supprimer);
 
+            hbox.setSpacing(5);
+            hbox.prefWidthProperty().bind(vbox.widthProperty());
             vbox.getChildren().add(hbox);
         }
     }
