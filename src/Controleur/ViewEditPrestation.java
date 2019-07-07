@@ -4,6 +4,7 @@ import FichierClients.MenuViews;
 import Model.Client;
 import Model.Prestation;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -63,10 +64,18 @@ public class ViewEditPrestation {
             //nothing to do here, it's normal to possibly have an exception
         }
 
-        if(prestation.isWellCreated()) {
+        if(editedPrestation.isWellCreated()) {
             prestation.Copy(editedPrestation);
             Collections.sort(client.getPrestations(), Collections.reverseOrder());
             MenuViews.setViewClient(client);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Un problème a été rencontré.\nLa prestation n'a pas pu être ajoutée au client.");
+            alert.setContentText(editedPrestation.getErrorMessage());
+
+            alert.showAndWait();
         }
     }
 }

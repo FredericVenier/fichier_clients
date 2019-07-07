@@ -68,4 +68,21 @@ public class Client implements Comparable<Client>{
     public boolean isWellCreated() {
         return !firstname.equals("") && !lastname.equals("") && !email.equals("") && email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
     }
+
+    public String getErrorMessage() {
+        String errorMessage = "";
+
+        if(firstname.equals(""))
+            errorMessage += "Le prénom n'a pas été indiqué.\n";
+
+        if(lastname.equals(""))
+            errorMessage += "Le nom de famille n'a pas été indiqué.\n";
+
+        if(email.equals(""))
+            errorMessage += "L'e-mail n'a pas été indiqué.";
+        else if(!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
+            errorMessage += "Le format de l'e-mail n'est pas valide.\nFormat attendu : xx@xx.xx";
+
+        return errorMessage;
+    }
 }

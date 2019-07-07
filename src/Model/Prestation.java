@@ -66,4 +66,19 @@ public class Prestation implements Comparable<Prestation> {
     public int compareTo(Prestation prestation) {
         return this.date.compareTo(prestation.getDate());
     }
+
+    public String getErrorMessage() {
+        String errorMessage = "";
+
+        if(description.equals(""))
+            errorMessage += "Veuillez décrire la prestation.\n";
+
+        if(date == null)
+            errorMessage += "La date indiquée n'est pas valide.\nFormat attendu : jj/mm/aaaa\n";
+
+        if(price<0)
+            errorMessage += "Le prix indiqué n'est pas valide.\nFormat attendu : xx.xx";
+
+        return errorMessage;
+    }
 }

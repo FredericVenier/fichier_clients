@@ -42,9 +42,9 @@
          </items></ToolBar>
    </top>
    <center>
-      <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="vbox" />
+            <VBox fx:id="vbox" fillWidth="false" />
          </content>
       </ScrollPane>
    </center>

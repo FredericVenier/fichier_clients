@@ -3,6 +3,7 @@ package Controleur;
 import FichierClients.MenuViews;
 import Model.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -41,6 +42,14 @@ public class ViewEditClient {
         if(editedClient.isWellCreated()) {
             MenuViews.editClient(client, editedClient);
             MenuViews.setViewSearch();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Un problème a été rencontré.\nLe client n'a pas pu être modifié.");
+            alert.setContentText(editedClient.getErrorMessage());
+
+            alert.showAndWait();
         }
     }
 }

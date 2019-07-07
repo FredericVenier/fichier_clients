@@ -4,6 +4,7 @@ import FichierClients.MenuViews;
 import Model.Client;
 import Model.Prestation;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
@@ -58,6 +59,14 @@ public class ViewNewPrestation {
         if(prestation.isWellCreated()) {
             client.addPrestation(prestation);
             MenuViews.setViewClient(client);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Un problème a été rencontré.\nLa prestation n'a pas pu être ajoutée au client.");
+            alert.setContentText(prestation.getErrorMessage());
+
+            alert.showAndWait();
         }
     }
 }

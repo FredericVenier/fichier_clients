@@ -4,14 +4,15 @@ import FichierClients.MenuViews;
 import Model.Client;
 import Model.Prestation;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 public class ViewClient {
     Client client;
@@ -56,7 +57,12 @@ public class ViewClient {
             price.setText(Float.toString(p.getPrice()));
             labelsVBox.getChildren().add(price);
 
+            HBox.setMargin(labelsVBox, new Insets(5,0,5,5));
             hbox.getChildren().add(labelsVBox);
+
+            Pane rightAlignmentPane = new Pane();
+            HBox.setHgrow(rightAlignmentPane, Priority.ALWAYS);
+            hbox.getChildren().add(rightAlignmentPane);
 
             Button same = new Button();
             same.setText("même prestation");
@@ -83,8 +89,15 @@ public class ViewClient {
             });
             Tooltip supprimerTooltip = new Tooltip("Supprimer la prestation au client.");
             supprimer.setTooltip(supprimerTooltip);
+            HBox.setMargin(supprimer, new Insets(0,5,0,0));
             hbox.getChildren().add(supprimer);
 
+            hbox.setSpacing(5);
+            hbox.prefWidthProperty().bind(vbox.widthProperty());
+            if(vbox.getChildren().size()%2 == 1) {
+                hbox.setBackground((new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
+            }
+            hbox.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox);
         }
     }
@@ -102,8 +115,17 @@ public class ViewClient {
     }
 
     public void removePrestation(Prestation prestation) {
-        client.removePrestation(prestation);
-        updatePrestations();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Suppression");
+        alert.setHeaderText("Voulez-vous vraiment supprimer cette prestation ?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            client.removePrestation(prestation);
+            updatePrestations();
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
     }
 
     public void retour() {

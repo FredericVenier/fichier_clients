@@ -33,7 +33,12 @@ public class MenuViews {
 
         view.init();
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
@@ -54,7 +59,11 @@ public class MenuViews {
         }
 
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
@@ -76,7 +85,11 @@ public class MenuViews {
 
         view.init();
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
@@ -98,7 +111,11 @@ public class MenuViews {
 
         view.init();
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
@@ -121,7 +138,11 @@ public class MenuViews {
 
         view.init();
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }
@@ -144,7 +165,11 @@ public class MenuViews {
 
         view.init();
         stage.setTitle("Fichier Clients");
-        stage.setScene(new Scene(root, 1024, 576));
+        Scene mainScene = Main.getScene();
+        if(mainScene == null)
+            stage.setScene(new Scene(root, 1024, 576));
+        else
+            stage.setScene(new Scene(root, mainScene.getWidth(), mainScene.getHeight()));
         stage.getScene().getStylesheets().add("css/style.css");
         Main.setStage(stage);
     }

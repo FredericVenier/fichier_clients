@@ -1,6 +1,7 @@
 package FichierClients;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -19,6 +20,12 @@ public class Main extends Application {
             mainStage.setTitle(s.getTitle());
             mainStage.setScene(s.getScene());
         }
+    }
+
+    public static Scene getScene() {
+        if(mainStage == null)
+            return null;
+        return mainStage.getScene();
     }
 
     public static void main(String[] args) {

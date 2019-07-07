@@ -4,15 +4,14 @@ import FichierClients.MenuViews;
 import Model.Client;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ViewSearch {
     private List<Client> clients;
@@ -56,6 +55,7 @@ public class ViewSearch {
 
             Label lastname = new Label();
             lastname.setText(c.getLastname());
+            HBox.setMargin(lastname, new Insets(0,0,0,5));
             hbox.getChildren().add(lastname);
 
             Label firstname = new Label();
@@ -73,6 +73,7 @@ public class ViewSearch {
             });
             Tooltip voirTooltip = new Tooltip("Voir les détails du client et ses précédentes prestations.");
             voir.setTooltip(voirTooltip);
+            HBox.setMargin(voir, new Insets(5,0,5,0));
             hbox.getChildren().add(voir);
 
             Button modifier = new Button();
@@ -82,6 +83,7 @@ public class ViewSearch {
             });
             Tooltip modifierTooltip = new Tooltip("Modifier les informations du client.");
             modifier.setTooltip(modifierTooltip);
+            HBox.setMargin(modifier, new Insets(5,0,5,0));
             hbox.getChildren().add(modifier);
 
             Button supprimer = new Button();
@@ -91,10 +93,15 @@ public class ViewSearch {
             });
             Tooltip supprimerTooltip = new Tooltip("Supprimer le client du fichier clients.");
             supprimer.setTooltip(supprimerTooltip);
+            HBox.setMargin(supprimer, new Insets(5,5,5,0));
             hbox.getChildren().add(supprimer);
 
             hbox.setSpacing(5);
             hbox.prefWidthProperty().bind(vbox.widthProperty());
+            if(vbox.getChildren().size()%2 == 1) {
+                hbox.setBackground((new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY))));
+            }
+            hbox.setAlignment(Pos.CENTER);
             vbox.getChildren().add(hbox);
         }
     }
@@ -104,8 +111,17 @@ public class ViewSearch {
     }
 
     private void removeClient(Client c) {
-        this.clients.remove(c);
-        updateClientsDisplayed(clients);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Suppression");
+        alert.setHeaderText("Voulez-vous vraiment supprimer ce client du fichier ?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            this.clients.remove(c);
+            updateClientsDisplayed(clients);
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
     }
 
     private List<Client> search() {

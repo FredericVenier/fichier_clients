@@ -3,6 +3,7 @@ package Controleur;
 import FichierClients.MenuViews;
 import Model.Client;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 public class ViewNewClient {
@@ -28,6 +29,14 @@ public class ViewNewClient {
         if(client.isWellCreated()) {
             MenuViews.addClient(client);
             MenuViews.setViewSearch();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Un problème a été rencontré.\nLe client n'a pas pu être ajouté au fichier.");
+            alert.setContentText(client.getErrorMessage());
+
+            alert.showAndWait();
         }
     }
 }
