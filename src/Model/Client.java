@@ -9,9 +9,11 @@ public class Client implements Comparable<Client>{
     private String lastname;
     private String email;
     private List<Prestation> prestations;
+    private String hashCode;
 
     public Client() {
         prestations = new ArrayList<>();
+        hashCode = null;
     }
 
     public Client(String firstname, String lastname, String email) {
@@ -19,6 +21,15 @@ public class Client implements Comparable<Client>{
         this.lastname = lastname;
         this.email = email;
 
+        generateHashCode();
+        prestations = new ArrayList<>();
+    }
+
+    public Client(String firstname, String lastname, String email, String hashCode) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.hashCode = hashCode;
         prestations = new ArrayList<>();
     }
 
@@ -33,6 +44,8 @@ public class Client implements Comparable<Client>{
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
+
+    public void setHashCode(String newHashCode) {if(this.hashCode == null)this.hashCode = newHashCode;}
 
     public void addPrestation(Prestation newPrestation) {
         this.prestations.add(newPrestation);
@@ -53,6 +66,8 @@ public class Client implements Comparable<Client>{
         return this.email;
     }
 
+    public String getHashCode() {return this.hashCode;}
+
     public List<Prestation> getPrestations() {
         return this.prestations;
     }
@@ -67,6 +82,14 @@ public class Client implements Comparable<Client>{
 
     public boolean isWellCreated() {
         return !firstname.equals("") && !lastname.equals("") && !email.equals("") && email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+    }
+
+    public boolean isCompletelyLoaded() {
+        return  (email != null && !email.isEmpty());
+    }
+
+    public void resetPrestations(){
+        this.prestations = new ArrayList<>();
     }
 
     public String getErrorMessage() {
@@ -84,5 +107,13 @@ public class Client implements Comparable<Client>{
             errorMessage += "Le format de l'e-mail n'est pas valide.\nFormat attendu : xx@xx.xx";
 
         return errorMessage;
+    }
+
+    private void generateHashCode() {
+        String toBeHashed = firstname;
+        toBeHashed += lastname;
+        toBeHashed += System.currentTimeMillis();
+
+        this.hashCode = "" + toBeHashed.hashCode();
     }
 }

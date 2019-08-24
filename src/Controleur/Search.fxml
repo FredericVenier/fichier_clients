@@ -17,12 +17,12 @@
         <items>
             <Label text="Rechercher : " />
             <Label prefHeight="29.0" prefWidth="31.0" text="Nom" />
-            <TextField fx:id="lastname" onKeyReleased="#updateResearch" prefHeight="28.0" prefWidth="98.0" promptText="obligatoire">
+            <TextField fx:id="lastname" onKeyReleased="#updateResearch" prefHeight="28.0" prefWidth="98.0">
                <tooltip>
                   <Tooltip text="Veuillez rensigner le nom de famille pour pouvoir effectuer une recherche." />
                </tooltip></TextField>
             <Label prefHeight="29.0" prefWidth="51.0" text="Prénom" />
-            <TextField fx:id="firstname" onKeyReleased="#updateResearch" prefHeight="28.0" prefWidth="118.0" promptText="facultatif" />
+            <TextField fx:id="firstname" onKeyReleased="#updateResearch" prefHeight="28.0" prefWidth="118.0" />
             <Pane HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#newClient" text="Nouveau">
                <tooltip>

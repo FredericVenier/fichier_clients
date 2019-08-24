@@ -2,6 +2,7 @@ package Controleur;
 
 import FichierClients.MenuViews;
 import Model.Client;
+import Model.JSONHandler;
 import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -54,7 +55,7 @@ public class ViewClient {
             labelsVBox.getChildren().add(description);
 
             Label price = new Label();
-            price.setText(Float.toString(p.getPrice()));
+            price.setText(Float.toString(p.getPrice()) + " €");
             labelsVBox.getChildren().add(price);
 
             HBox.setMargin(labelsVBox, new Insets(5,0,5,5));
@@ -107,6 +108,7 @@ public class ViewClient {
         newPrestation.setDate(new Date());
 
         client.addPrestation(newPrestation);
+        JSONHandler.savePrestations(client);
         updatePrestations();
     }
 
@@ -122,6 +124,7 @@ public class ViewClient {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
             client.removePrestation(prestation);
+            JSONHandler.savePrestations(client);
             updatePrestations();
         } else {
             // ... user chose CANCEL or closed the dialog
@@ -129,6 +132,7 @@ public class ViewClient {
     }
 
     public void retour() {
+        client.resetPrestations();
         MenuViews.setViewSearch();
     }
 

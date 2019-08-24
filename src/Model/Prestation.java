@@ -1,5 +1,6 @@
 package Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Prestation implements Comparable<Prestation> {
@@ -36,7 +37,11 @@ public class Prestation implements Comparable<Prestation> {
     }
 
     public void setDate(String newDate) {
-        this.date = new Date(newDate);
+        try {
+            setDate(new SimpleDateFormat("dd/MM/yyyy").parse(newDate));
+        } catch(Exception ex) {
+            //nothing to do here, it's normal to possibly have an exception
+        }
     }
 
     public void setDescription(String newDescription) {

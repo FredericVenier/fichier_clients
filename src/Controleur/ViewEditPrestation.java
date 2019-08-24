@@ -2,6 +2,7 @@ package Controleur;
 
 import FichierClients.MenuViews;
 import Model.Client;
+import Model.JSONHandler;
 import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -66,6 +67,7 @@ public class ViewEditPrestation {
 
         if(editedPrestation.isWellCreated()) {
             prestation.Copy(editedPrestation);
+            JSONHandler.savePrestations(client);
             Collections.sort(client.getPrestations(), Collections.reverseOrder());
             MenuViews.setViewClient(client);
 

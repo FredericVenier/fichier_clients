@@ -37,7 +37,8 @@ public class ViewEditClient {
     public void ajouter() {
         Client editedClient = new Client(firstname.getText().equals("")? client.getFirstname() : firstname.getText(),
                 lastname.getText().equals("")? client.getLastname() : lastname.getText(),
-                email.getText().equals("")? client.getEmail() : email.getText());
+                email.getText().equals("")? client.getEmail() : email.getText(),
+                client.getHashCode());
 
         if(editedClient.isWellCreated()) {
             MenuViews.editClient(client, editedClient);

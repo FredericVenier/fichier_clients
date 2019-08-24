@@ -117,7 +117,7 @@ public class ViewSearch {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            this.clients.remove(c);
+            MenuViews.removeClient(c);
             updateClientsDisplayed(clients);
         } else {
             // ... user chose CANCEL or closed the dialog
@@ -130,7 +130,7 @@ public class ViewSearch {
 
         List<Client> searchingResult = recursive_search(strLastname, clients);
 
-        if(!strFirstname.equals("") && !strLastname.equals("")) {
+        if(!strFirstname.equals("")) {
             List<Client> tmp = new ArrayList<>(searchingResult);
             for(Client c : tmp) {
                 if(!c.getFirstname().toLowerCase().startsWith(strFirstname.toLowerCase())) {
@@ -146,7 +146,8 @@ public class ViewSearch {
         List<Client> searchingResult = new ArrayList<>();
 
         if(clients.size() == 0 || lastname.equals("")) {
-            return clients;
+            searchingResult = new ArrayList<>(clients);
+            return searchingResult;
         }
 
         int i = clients.size()/2;

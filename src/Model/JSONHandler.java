@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -18,7 +19,7 @@ public class JSONHandler {
 
     }
 
-    public static void saveClients(List<Client> clients) {
+    public static void saveAllClients(List<Client> clients) {
         JSONObject obj = new JSONObject();
 
         //on remplit un JSONArray avec les noms/prenoms des clients
@@ -28,6 +29,7 @@ public class JSONHandler {
             JSONObject objClient = new JSONObject();
             objClient.put("firstname", client.getFirstname());
             objClient.put("lastname", client.getLastname());
+            objClient.put("hashcode", client.getHashCode());
 
             jsonClients.add(objClient);
         }
@@ -44,25 +46,11 @@ public class JSONHandler {
     }
 
     public static void saveClient(Client client) {
-        String filePath_client = filePath + "clients" + File.separator + client.getFirstname() + "_" + client.getLastname() + ".json";
+        String filePath_client = filePath + "clients" + File.separator + client.getHashCode() + ".json";
 
         //on remplit un JSONArray avec les infos des clients (email, prestations, ...)
         JSONObject objClient = new JSONObject();
         objClient.put("email", client.getEmail());
-
-        JSONArray jsonPrestations = new JSONArray();
-        for(int i=0; i<client.getPrestations().size(); i++) {
-            Prestation prestation = client.getPrestations().get(i);
-
-            JSONObject objPrestation = new JSONObject();
-            objPrestation.put("date", prestation.getDate().toString());
-            objPrestation.put("description", prestation.getDescription());
-            objPrestation.put("price", prestation.getPrice());
-
-            jsonPrestations.add(objPrestation);
-        }
-
-        objClient.put("prestations", jsonPrestations);
 
         try (FileWriter file = new FileWriter(filePath_client)) {
             file.write(objClient.toJSONString());
@@ -73,7 +61,38 @@ public class JSONHandler {
         }
     }
 
-    public static List<Client> loadClients() {
+    public static void savePrestations(Client client) {
+        String filePath_clientPrestations = filePath + "clients" + File.separator + "prestations" + File.separator + client.getHashCode() + ".json";
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        //on remplit un JSONArray avec les infos des clients (email, prestations, ...)
+        JSONObject objClient = new JSONObject();
+
+        JSONArray jsonPrestations = new JSONArray();
+        for(int i=0; i<client.getPrestations().size(); i++) {
+            Prestation prestation = client.getPrestations().get(i);
+
+            JSONObject objPrestation = new JSONObject();
+            objPrestation.put("date", formatter.format(prestation.getDate()));
+            objPrestation.put("description", prestation.getDescription());
+            objPrestation.put("price", prestation.getPrice());
+
+            jsonPrestations.add(objPrestation);
+        }
+
+        objClient.put("prestations", jsonPrestations);
+
+        try (FileWriter file = new FileWriter(filePath_clientPrestations)) {
+            file.write(objClient.toJSONString());
+            file.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Client> loadAllClients() {
         List<Client> clients = new ArrayList<>();
 
         try {
@@ -93,12 +112,13 @@ public class JSONHandler {
 
                 if(innerObj.get("firstname") != null) client.setFirstname((String) innerObj.get("firstname"));
                 if(innerObj.get("lastname") != null) client.setLastname((String) innerObj.get("lastname"));
+                if(innerObj.get("hashcode") != null) client.setHashCode((String) innerObj.get("hashcode"));
 
                 clients.add(client);
             }
 
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            return null;
         } catch (ParseException ex) {
             ex.printStackTrace();
         } catch (IOException e) {
@@ -109,7 +129,7 @@ public class JSONHandler {
     }
 
     public static void loadClient(Client client) {
-        String filePath_client = filePath + "clients" + File.separator + client.getFirstname() + "_" + client.getLastname() + ".json";
+        String filePath_client = filePath + "clients" + File.separator + client.getHashCode() + ".json";
 
         try {
             //on ouvre le json
@@ -119,7 +139,26 @@ public class JSONHandler {
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
             //on recupere l'email
-            if(jsonObject.get("email") != null) client.setEmail((String) jsonObject.get("emaim"));
+            if(jsonObject.get("email") != null) client.setEmail((String) jsonObject.get("email"));
+
+        } catch (FileNotFoundException ex) {
+            return;
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadPrestations(Client client) {
+        String filePath_clientPrestations = filePath + "clients" + File.separator + "prestations" + File.separator + client.getHashCode() + ".json";
+
+        try {
+            //on ouvre le json
+            FileReader reader = new FileReader(filePath_clientPrestations);
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 
             JSONArray jsonPrestations = (JSONArray) jsonObject.get("prestations");
             Iterator i = jsonPrestations.iterator();
@@ -130,17 +169,27 @@ public class JSONHandler {
 
                 if(innerObj.get("date") != null) prestation.setDate((String) innerObj.get("date"));
                 if(innerObj.get("description") != null) prestation.setDescription((String) innerObj.get("description"));
-                if(innerObj.get("price") != null) prestation.setPrice((float) innerObj.get("price"));
+                if(innerObj.get("price") != null) prestation.setPrice((float)(double) innerObj.get("price"));
 
                 client.addPrestation(prestation);
             }
 
         } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
+            return;
         } catch (ParseException ex) {
             ex.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteClient(Client client) {
+        String filePath_client = filePath + "clients" + File.separator + client.getHashCode() + ".json";
+        File fileClient = new File(filePath_client);
+        fileClient.delete();
+
+        String filePath_clientPrestations = filePath + "clients" + File.separator + "prestations" + File.separator + client.getHashCode() + ".json";
+        File filePrestations = new File(filePath_clientPrestations);
+        filePrestations.delete();
     }
 }

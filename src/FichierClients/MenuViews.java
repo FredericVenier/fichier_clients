@@ -2,6 +2,7 @@ package FichierClients;
 
 import Controleur.*;
 import Model.Client;
+import Model.JSONHandler;
 import Model.Prestation;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -73,6 +74,9 @@ public class MenuViews {
         BorderPane root = new BorderPane();
         FXMLLoader loader = new FXMLLoader();
 
+        if(c.isCompletelyLoaded() == false)
+            JSONHandler.loadClient(c);
+
         ViewEditClient view = new ViewEditClient(c);
         loader.setLocation(Main.class.getResource("/Controleur/NewClient.fxml"));
         loader.setController(view);
@@ -99,6 +103,11 @@ public class MenuViews {
         Stage stage = new Stage();
         BorderPane root = new BorderPane();
         FXMLLoader loader = new FXMLLoader();
+
+        if(client.isCompletelyLoaded() == false)
+            JSONHandler.loadClient(client);
+        if(client.getPrestations().isEmpty())
+            JSONHandler.loadPrestations(client);
 
         ViewClient view = new ViewClient(client);
         loader.setLocation(Main.class.getResource("/Controleur/Client.fxml"));
@@ -175,13 +184,18 @@ public class MenuViews {
     }
 
     public static void setClients() {
-        //clients = JSONHandler.loadClients();
-        clients = new ArrayList<>();
+        clients = JSONHandler.loadAllClients();
+
+        if(clients == null)
+            clients = new ArrayList<>();
     }
 
     public static void addClient(Client newClient) {
         clients.add(newClient);
         Collections.sort(clients);
+
+        JSONHandler.saveAllClients(clients);
+        JSONHandler.saveClient(newClient);
     }
 
     public static void editClient(Client oldCLient, Client newClient) {
@@ -192,6 +206,15 @@ public class MenuViews {
         }
         clients.set(i, newClient);
         Collections.sort(clients);
+
+        JSONHandler.saveAllClients(clients);
+        JSONHandler.saveClient(newClient);
     }
 
+    public static void removeClient(Client removedClient) {
+        clients.remove(removedClient);
+
+        JSONHandler.deleteClient(removedClient);
+        JSONHandler.saveAllClients(clients);
+    }
 }

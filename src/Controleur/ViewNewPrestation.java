@@ -2,6 +2,7 @@ package Controleur;
 
 import FichierClients.MenuViews;
 import Model.Client;
+import Model.JSONHandler;
 import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -58,6 +59,7 @@ public class ViewNewPrestation {
 
         if(prestation.isWellCreated()) {
             client.addPrestation(prestation);
+            JSONHandler.savePrestations(client);
             MenuViews.setViewClient(client);
 
         } else {
