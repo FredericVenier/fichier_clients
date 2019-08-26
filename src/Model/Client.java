@@ -10,26 +10,33 @@ public class Client implements Comparable<Client>{
     private String email;
     private List<Prestation> prestations;
     private String hashCode;
+    private String address;
+    private String phoneNumber;
 
     public Client() {
         prestations = new ArrayList<>();
         hashCode = null;
     }
 
-    public Client(String firstname, String lastname, String email) {
+    public Client(String firstname, String lastname, String email, String address, String phoneNumber) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
 
         generateHashCode();
         prestations = new ArrayList<>();
     }
 
-    public Client(String firstname, String lastname, String email, String hashCode) {
+    public Client(String firstname, String lastname, String email, String address, String phoneNumber, String hashCode) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.hashCode = hashCode;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+
         prestations = new ArrayList<>();
     }
 
@@ -44,6 +51,10 @@ public class Client implements Comparable<Client>{
     public void setEmail(String newEmail) {
         this.email = newEmail;
     }
+
+    public void setAddress(String newAddress) {this.address = newAddress;}
+
+    public void setPhoneNumber(String newPhoneNumber) {this.phoneNumber = newPhoneNumber;}
 
     public void setHashCode(String newHashCode) {if(this.hashCode == null)this.hashCode = newHashCode;}
 
@@ -68,6 +79,10 @@ public class Client implements Comparable<Client>{
 
     public String getHashCode() {return this.hashCode;}
 
+    public String getAddress() {return this.address;}
+
+    public String getPhoneNumber() {return phoneNumber;}
+
     public List<Prestation> getPrestations() {
         return this.prestations;
     }
@@ -81,7 +96,7 @@ public class Client implements Comparable<Client>{
     }
 
     public boolean isWellCreated() {
-        return !firstname.equals("") && !lastname.equals("") && !email.equals("") && email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$");
+        return !firstname.equals("") && !lastname.equals("") && (email.equals("") || email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$")) && (phoneNumber.isEmpty() || phoneNumber.matches("^[0-9]{10}$") || phoneNumber.matches("^[+][0-9]{11,12}$"));
     }
 
     public boolean isCompletelyLoaded() {
@@ -101,10 +116,11 @@ public class Client implements Comparable<Client>{
         if(lastname.equals(""))
             errorMessage += "Le nom de famille n'a pas été indiqué.\n";
 
-        if(email.equals(""))
-            errorMessage += "L'e-mail n'a pas été indiqué.";
-        else if(!email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
+        if(!email.isEmpty() && !email.matches("^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$"))
             errorMessage += "Le format de l'e-mail n'est pas valide.\nFormat attendu : xx@xx.xx";
+
+        if(!(phoneNumber.isEmpty() || phoneNumber.matches("^[0-9]{10}$") || phoneNumber.matches("^[+][0-9]{11,12}$")))
+            errorMessage += "Le format du numéro de téléphone n'est pas valide.\nFormat attendu : xxxxxxxxxx ou +xxxxxxxxxxx.";
 
         return errorMessage;
     }

@@ -25,7 +25,13 @@ public class ViewClient {
     @FXML
     private Label email;
     @FXML
+    private Label address;
+    @FXML
+    private Label phoneNumber;
+    @FXML
     private VBox vbox;
+    @FXML
+    private HBox HBoxLocalisationInfo;
 
     public ViewClient(Client client) {
         this.client = client;
@@ -35,6 +41,9 @@ public class ViewClient {
         firstname.setText(client.getFirstname());
         lastname.setText(client.getLastname());
         email.setText(client.getEmail());
+        address.setText(client.getAddress());
+        phoneNumber.setText(client.getPhoneNumber());
+
         updatePrestations();
     }
 

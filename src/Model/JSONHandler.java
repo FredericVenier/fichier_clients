@@ -51,6 +51,8 @@ public class JSONHandler {
         //on remplit un JSONArray avec les infos des clients (email, prestations, ...)
         JSONObject objClient = new JSONObject();
         objClient.put("email", client.getEmail());
+        objClient.put("phonenumber", client.getPhoneNumber());
+        objClient.put("address", client.getAddress());
 
         try (FileWriter file = new FileWriter(filePath_client)) {
             file.write(objClient.toJSONString());
@@ -140,6 +142,8 @@ public class JSONHandler {
 
             //on recupere l'email
             if(jsonObject.get("email") != null) client.setEmail((String) jsonObject.get("email"));
+            if(jsonObject.get("address") != null) client.setAddress((String) jsonObject.get("address"));
+            if(jsonObject.get("phonenumber") != null) client.setPhoneNumber((String) jsonObject.get("phonenumber"));
 
         } catch (FileNotFoundException ex) {
             return;

@@ -35,20 +35,32 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Prénom   " />
-                  <TextField fx:id="firstname" onAction="#ajouter" />
+                  <Label text="Prénom " />
+                  <TextField fx:id="firstname" onAction="#ajouter" promptText="Obligatoire" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Nom " />
-                  <TextField fx:id="lastname" onAction="#ajouter" />
+                  <TextField fx:id="lastname" onAction="#ajouter" promptText="Obligatoire" />
                </children>
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="E-Mail " />
-                  <TextField fx:id="email" onAction="#ajouter" />
+                  <TextField fx:id="email" onAction="#ajouter" promptText="Facultatif" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="144.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Téléphone " />
+                  <TextField fx:id="phoneNumber" onAction="#ajouter" promptText="Facultatif" />
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="110.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Adresse " />
+                  <TextField fx:id="address" onAction="#ajouter" promptText="Facultatif" />
                </children>
             </HBox>
          </children>

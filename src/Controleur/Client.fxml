@@ -27,7 +27,17 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Label fx:id="email" text="Label" />
+                  <HBox fx:id="HBoxLocalisationInfo" layoutX="10.0" layoutY="10.0">
+                     <children>
+                        <Label fx:id="phoneNumber" text="Label" />
+                        <Label fx:id="email" layoutX="10.0" layoutY="10.0" text="Label">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label fx:id="address" text="Label" />
                </children>
             </VBox>
             <Pane HBox.hgrow="ALWAYS" />

@@ -18,6 +18,10 @@ public class ViewEditClient {
     private TextField email;
     @FXML
     private Button ajouter;
+    @FXML
+    private TextField phoneNumber;
+    @FXML
+    private TextField address;
 
     public ViewEditClient(Client client) {
         this.client = client;
@@ -27,6 +31,9 @@ public class ViewEditClient {
         lastname.setPromptText(client.getLastname());
         firstname.setPromptText(client.getFirstname());
         email.setPromptText(client.getEmail());
+        address.setPromptText(client.getAddress());
+        phoneNumber.setPromptText(client.getPhoneNumber());
+
         ajouter.setText("modifier");
     }
 
@@ -38,6 +45,8 @@ public class ViewEditClient {
         Client editedClient = new Client(firstname.getText().equals("")? client.getFirstname() : firstname.getText(),
                 lastname.getText().equals("")? client.getLastname() : lastname.getText(),
                 email.getText().equals("")? client.getEmail() : email.getText(),
+                address.getText().equals("")? client.getAddress() : address.getText(),
+                phoneNumber.getText().equals("")? client.getPhoneNumber() : phoneNumber.getText(),
                 client.getHashCode());
 
         if(editedClient.isWellCreated()) {

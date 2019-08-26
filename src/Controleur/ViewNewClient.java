@@ -14,6 +14,10 @@ public class ViewNewClient {
     private TextField firstname;
     @FXML
     private TextField email;
+    @FXML
+    private TextField address;
+    @FXML
+    private TextField phoneNumber;
 
     public ViewNewClient() {
 
@@ -24,7 +28,7 @@ public class ViewNewClient {
     }
 
     public void ajouter() {
-        Client client = new Client(firstname.getText(), lastname.getText(), email.getText());
+        Client client = new Client(firstname.getText(), lastname.getText(), email.getText(), address.getText(), phoneNumber.getText());
 
         if(client.isWellCreated()) {
             MenuViews.addClient(client);
