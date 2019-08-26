@@ -4,4 +4,4 @@
 *.MF
 *.json
 .idea/*
-out/*"
+out/

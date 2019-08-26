@@ -4,7 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
@@ -40,6 +42,131 @@
                   <DatePicker fx:id="date" />
                </children>
             </HBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton fx:id="RadioButtonFemme" mnemonicParsing="false" onAction="#onSelectFemme" text="Femme">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="Sexe" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" onAction="#onSelectHomme" text="Homme" toggleGroup="$Sexe" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="VBoxFemme" alignment="CENTER" fillWidth="false" visible="false">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Coupe" />
+                              <HBox fx:id="HBoxCoupeFemme" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Shp + coupe + coiffage femme">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Coupe" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="Frange" />
+                                    <RadioButton mnemonicParsing="false" text="Shp + coupe enfant" toggleGroup="$Coupe" />
+                                    <RadioButton mnemonicParsing="false" text="Shp + coupe ado" toggleGroup="$Coupe" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="HBoxCoupeFemmeLongueur" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Longs">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Longueur" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="Mi-longs" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Courts" toggleGroup="$Longueur" />
+                                 </children></HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Technique" />
+                              <VBox fx:id="VBoxTechnique" prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Coloration racines" />
+                                          <RadioButton mnemonicParsing="false" text="Coloration ton sur ton" />
+                                          <RadioButton mnemonicParsing="false" text="Dose supplémentaire 10g" />
+                                          <RadioButton mnemonicParsing="false" text="Patine" />
+                                          <RadioButton mnemonicParsing="false" text="Shampooing américain" />
+                                          <RadioButton mnemonicParsing="false" text="Bronde" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <RadioButton mnemonicParsing="false" text="Flash" />
+                                          <RadioButton mnemonicParsing="false" text="Balayage" />
+                                          <RadioButton mnemonicParsing="false" text="Décoloration racines" />
+                                          <RadioButton mnemonicParsing="false" text="Gommage" />
+                                          <RadioButton mnemonicParsing="false" text="Permanante" />
+                                          <RadioButton mnemonicParsing="false" text="Lissage Brésilien" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <HBox fx:id="HBoxTechniqueFemmeLongueur" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Longs" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Mi-longs" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Courts" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Demi tête" toggleGroup="$Longueur" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Coiffage" />
+                              <HBox fx:id="HBoxCoiffureFemme" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Shp + coiffage" />
+                                    <RadioButton mnemonicParsing="false" text="Supplément brush " />
+                                    <RadioButton mnemonicParsing="false" text="Bar à brush" />
+                                    <RadioButton mnemonicParsing="false" text="Attaches et chignons" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="HBoxCoiffureFemmeBrush" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Très longs/épais/frisés">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Brush" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton mnemonicParsing="false" text="Ado" toggleGroup="$Brush" />
+                                    <RadioButton mnemonicParsing="false" text="Enfant" toggleGroup="$Brush" />
+                                 </children>
+                              </HBox>
+                              <HBox fx:id="HBoxCoiffureFemmeLongueur" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Longs" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Mi-longs" toggleGroup="$Longueur" />
+                                    <RadioButton mnemonicParsing="false" text="Courts" toggleGroup="$Longueur" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <RadioButton mnemonicParsing="false" text="Soins" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Soin classique" />
+                                    <RadioButton mnemonicParsing="false" text="Soin profond" />
+                                    <RadioButton mnemonicParsing="false" text="Soin pigments" />
+                                    <RadioButton mnemonicParsing="false" text="Démélant" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Description" />

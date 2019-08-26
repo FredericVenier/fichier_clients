@@ -7,7 +7,9 @@ import Model.Prestation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -23,6 +25,10 @@ public class ViewNewPrestation {
     private TextField description;
     @FXML
     private TextField price;
+    @FXML
+    private RadioButton RadioButtonFemme;
+    @FXML
+    private VBox VBoxFemme;
 
     public ViewNewPrestation(Client client) {
         this.client = client;
@@ -30,6 +36,14 @@ public class ViewNewPrestation {
 
     public void init() {
         date.setValue(LocalDate.now());
+    }
+
+    public void onSelectFemme() {
+        VBoxFemme.setVisible(RadioButtonFemme.isSelected());
+    }
+
+    public void onSelectHomme() {
+        VBoxFemme.setVisible(RadioButtonFemme.isSelected());
     }
 
     public void retour() {
